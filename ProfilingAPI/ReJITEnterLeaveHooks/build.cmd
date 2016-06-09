@@ -1,0 +1,1 @@
+msbuild /p:Configuration="Release" /p:BuildOS="Windows_NT" /p:BuildType="Release" /p:BuildArch="x64" /p:CORECLR_PATH="..\coreclr"
