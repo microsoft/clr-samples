@@ -3,8 +3,6 @@
 
 #pragma once
 
-#include "profiler_pal.h"
-
 HRESULT RewriteIL(
     ICorProfilerInfo * pICorProfilerInfo,
     ICorProfilerFunctionControl * pICorProfilerFunctionControl,

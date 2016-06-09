@@ -51,7 +51,7 @@ Building on Windows
 
 ### Environment
 
-All instructions must be run on the ``Visual Studio Developer Command Prompt (x64)``.
+All instructions must be run on the ``VS 2015 x64 Native Tools Command Prompt``.
 
 ```batch
 SET CORECLR_PATH=../coreclr # default

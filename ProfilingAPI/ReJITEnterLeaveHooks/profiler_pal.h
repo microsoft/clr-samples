@@ -13,6 +13,8 @@
 #define CoTaskMemAlloc(cb) malloc(cb)
 #define CoTaskMemFree(cb) free(cb)
 
-#endif
+#define UINT_PTR_FORMAT "lx"
 
-#include <string>
+#else
+#define UINT_PTR_FORMAT "llx"
+#endif

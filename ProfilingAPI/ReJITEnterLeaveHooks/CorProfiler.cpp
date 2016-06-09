@@ -5,16 +5,16 @@
 #include "corhlpr.h"
 #include "CComPtr.h"
 #include "ILRewriter.h"
-#include <string>
+#include "profiler_pal.h"
 
 static void STDMETHODCALLTYPE Enter(FunctionID functionId)
 {
-    printf("\r\nEnter %lx", functionId);
+    printf("\r\nEnter %" UINT_PTR_FORMAT "", functionId);
 }
 
 static void STDMETHODCALLTYPE Leave(FunctionID functionId)
 {
-    printf("\r\nLeave %lx", functionId);
+    printf("\r\nLeave %" UINT_PTR_FORMAT "", functionId);
 }
 
 COR_SIGNATURE enterLeaveMethodSignature             [] = { IMAGE_CEE_CS_CALLCONV_STDCALL, 0x01, ELEMENT_TYPE_VOID, ELEMENT_TYPE_I };

@@ -4,8 +4,6 @@
 #pragma once
 
 #include <atomic>
-
-#include "profiler_pal.h"
 #include "cor.h"
 #include "corprof.h"
 
