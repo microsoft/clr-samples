@@ -9,12 +9,12 @@
 
 static void STDMETHODCALLTYPE Enter(FunctionID functionId)
 {
-    printf("\r\nEnter %" UINT_PTR_FORMAT "", functionId);
+    printf("\r\nEnter %" UINT_PTR_FORMAT "", (UINT64)functionId);
 }
 
 static void STDMETHODCALLTYPE Leave(FunctionID functionId)
 {
-    printf("\r\nLeave %" UINT_PTR_FORMAT "", functionId);
+    printf("\r\nLeave %" UINT_PTR_FORMAT "", (UINT64)functionId);
 }
 
 COR_SIGNATURE enterLeaveMethodSignature             [] = { IMAGE_CEE_CS_CALLCONV_STDCALL, 0x01, ELEMENT_TYPE_VOID, ELEMENT_TYPE_I };
