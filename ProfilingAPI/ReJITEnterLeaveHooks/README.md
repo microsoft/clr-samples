@@ -62,7 +62,7 @@ SET Output=CorProfiler.dll # default
 ```
 
 ### Build
-
+On the ``VS 2015 x64 Native Tools Command Prompt``.
 * msbuild
 * or open using Visual Studio 2015 Community and Build
 
