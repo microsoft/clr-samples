@@ -457,8 +457,9 @@ public:
 
     HRESULT Export()
     {
-        // One instruction produces 6 bytes in the worst case
-        unsigned maxSize = m_nInstrs * 6;
+        // One instruction produces 2 + sizeof(native int) bytes in the worst case which can be 10 bytes for 64-bit.
+        // For simplification we just use 10 here.
+        unsigned maxSize = m_nInstrs * 10;
 
         m_pOutputBuffer = new BYTE[maxSize];
         IfNullRet(m_pOutputBuffer);
@@ -472,6 +473,7 @@ public:
         // Go over all instructions and produce code for them
         for (ILInstr * pInstr = m_IL.m_pNext; pInstr != &m_IL; pInstr = pInstr->m_pNext)
         {
+            assert(offset < maxSize);
             pInstr->m_offset = offset;
 
             unsigned opcode = pInstr->m_opcode;

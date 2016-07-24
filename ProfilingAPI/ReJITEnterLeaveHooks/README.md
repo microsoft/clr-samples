@@ -58,11 +58,12 @@ SET CORECLR_PATH=../coreclr # default
 SET BuildOS=Windows # Windows(default)
 SET BuildArch=x64 # x64 (default)
 SET BuildType=Debug # Debug(default), Release
-SET Output=CorProfiler.dll # default
+SET Output=ClrProfiler.dll # default
 ```
 
 ### Build
 On the ``VS 2015 x64 Native Tools Command Prompt``.
+
 * msbuild
 * or open using Visual Studio 2015 Community and Build
 
@@ -71,7 +72,7 @@ On the ``VS 2015 x64 Native Tools Command Prompt``.
 ```batch
 SET CORECLR_PROFILER={cf0d821e-299b-5307-a3d8-b283c03916dd}
 SET CORECLR_ENABLE_PROFILING=1
-SET CORECLR_PROFILER_PATH=C:\filePath\to\CorProfiler.dll
+SET CORECLR_PROFILER_PATH=C:\filePath\to\ClrProfiler.dll
 corerun YourProgram.dll
 ```
 
@@ -82,6 +83,6 @@ This profiler is also capable of running on the .NET 4.6.1 (or higher) CLR.
 ```batch
 SET COR_PROFILER={cf0d821e-299b-5307-a3d8-b283c03916dd}
 SET COR_ENABLE_PROFILING=1
-SET COR_PROFILER_PATH=C:\filePath\to\CorProfiler.dll
+SET COR_PROFILER_PATH=C:\filePath\to\ClrProfiler.dll
 YourProgram.exe
 ```
