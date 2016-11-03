@@ -6,6 +6,7 @@
 #include "CComPtr.h"
 #include "ILRewriter.h"
 #include "profiler_pal.h"
+#include <string>
 
 static void STDMETHODCALLTYPE Enter(FunctionID functionId)
 {
@@ -37,7 +38,7 @@ CorProfiler::~CorProfiler()
 
 HRESULT STDMETHODCALLTYPE CorProfiler::Initialize(IUnknown *pICorProfilerInfoUnk)
 {
-    HRESULT queryInterfaceResult = pICorProfilerInfoUnk->QueryInterface(__uuidof(ICorProfilerInfo7), reinterpret_cast<void **>(&this->corProfilerInfo));
+    HRESULT queryInterfaceResult = pICorProfilerInfoUnk->QueryInterface(__uuidof(ICorProfilerInfo8), reinterpret_cast<void **>(&this->corProfilerInfo));
 
     if (FAILED(queryInterfaceResult))
     {
@@ -512,5 +513,26 @@ HRESULT STDMETHODCALLTYPE CorProfiler::GetAssemblyReferences(const WCHAR *wszAss
 
 HRESULT STDMETHODCALLTYPE CorProfiler::ModuleInMemorySymbolsUpdated(ModuleID moduleId)
 {
+    return S_OK;
+}
+
+HRESULT STDMETHODCALLTYPE CorProfiler::DynamicMethodJITCompilationStarted(FunctionID functionId, BOOL fIsSafeToBlock, LPCBYTE ilHeader, ULONG cbILHeader)
+{
+    ModuleID moduleId;
+    PCCOR_SIGNATURE ppvSig;
+    ULONG pbSig;
+    ULONG cchName = 0;
+    this->corProfilerInfo->GetDynamicFunctionInfo(functionId, &moduleId, &ppvSig, &pbSig, cchName, &cchName, nullptr);
+    std::wstring name(cchName, L'0');
+    this->corProfilerInfo->GetDynamicFunctionInfo(functionId, nullptr, nullptr, nullptr, cchName, nullptr, &name[0]);
+
+    wprintf(L"Dynamic Function JIT Compilation Started. ID: %llu, Name: %s, IL Size: %d, Sig Size: %d", functionId, name.c_str(), cbILHeader, pbSig);
+
+    return S_OK;
+}
+
+HRESULT STDMETHODCALLTYPE CorProfiler::DynamicMethodJITCompilationFinished(FunctionID functionId, HRESULT hrStatus, BOOL fIsSafeToBlock)
+{
+    wprintf(L"Dynamic Function JIT Compilation Finished. ID: %llu", functionId);
     return S_OK;
 }

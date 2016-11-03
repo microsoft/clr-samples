@@ -7,11 +7,11 @@
 #include "cor.h"
 #include "corprof.h"
 
-class CorProfiler : public ICorProfilerCallback7
+class CorProfiler : public ICorProfilerCallback8
 {
 private:
     std::atomic<int> refCount;
-    ICorProfilerInfo7* corProfilerInfo;
+    ICorProfilerInfo8* corProfilerInfo;
 public:
     CorProfiler();
     virtual ~CorProfiler();
@@ -105,9 +105,13 @@ public:
     HRESULT STDMETHODCALLTYPE GetAssemblyReferences(const WCHAR* wszAssemblyPath, ICorProfilerAssemblyReferenceProvider* pAsmRefProvider) override;
     HRESULT STDMETHODCALLTYPE ModuleInMemorySymbolsUpdated(ModuleID moduleId) override;
 
+    HRESULT STDMETHODCALLTYPE DynamicMethodJITCompilationStarted(FunctionID functionId, BOOL fIsSafeToBlock, LPCBYTE ilHeader, ULONG cbILHeader) override;
+    HRESULT STDMETHODCALLTYPE DynamicMethodJITCompilationFinished(FunctionID functionId, HRESULT hrStatus, BOOL fIsSafeToBlock) override;
+
     HRESULT STDMETHODCALLTYPE QueryInterface(REFIID riid, void **ppvObject) override
     {
-        if (riid == __uuidof(ICorProfilerCallback7) ||
+        if (riid == __uuidof(ICorProfilerCallback8) ||
+            riid == __uuidof(ICorProfilerCallback7) ||
             riid == __uuidof(ICorProfilerCallback6) ||
             riid == __uuidof(ICorProfilerCallback5) ||
             riid == __uuidof(ICorProfilerCallback4) ||
