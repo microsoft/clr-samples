@@ -33,7 +33,7 @@ export Output=CorProfiler.so # default
 
 ```bash
 git clone http://github.com/Microsoft/clr-samples
-cd clr-samples/profiling/eltprofiler
+cd clr-samples/ProfilingAPI/ReJITEnterLeaveHooks
 ./build.sh
 ```
 

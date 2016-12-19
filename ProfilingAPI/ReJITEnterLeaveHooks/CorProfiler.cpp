@@ -518,21 +518,12 @@ HRESULT STDMETHODCALLTYPE CorProfiler::ModuleInMemorySymbolsUpdated(ModuleID mod
 
 HRESULT STDMETHODCALLTYPE CorProfiler::DynamicMethodJITCompilationStarted(FunctionID functionId, BOOL fIsSafeToBlock, LPCBYTE ilHeader, ULONG cbILHeader)
 {
-    ModuleID moduleId;
-    PCCOR_SIGNATURE ppvSig;
-    ULONG pbSig;
-    ULONG cchName = 0;
-    this->corProfilerInfo->GetDynamicFunctionInfo(functionId, &moduleId, &ppvSig, &pbSig, cchName, &cchName, nullptr);
-    std::wstring name(cchName, L'0');
-    this->corProfilerInfo->GetDynamicFunctionInfo(functionId, nullptr, nullptr, nullptr, cchName, nullptr, &name[0]);
-
-    wprintf(L"Dynamic Function JIT Compilation Started. ID: %llu, Name: %s, IL Size: %d, Sig Size: %d", functionId, name.c_str(), cbILHeader, pbSig);
-
+    printf("\r\nDynamic Function JIT Compilation Started. %" UINT_PTR_FORMAT "", (UINT64)functionId);
     return S_OK;
 }
 
 HRESULT STDMETHODCALLTYPE CorProfiler::DynamicMethodJITCompilationFinished(FunctionID functionId, HRESULT hrStatus, BOOL fIsSafeToBlock)
 {
-    wprintf(L"Dynamic Function JIT Compilation Finished. ID: %llu", functionId);
+    printf("\r\nDynamic Function JIT Compilation Finished. %" UINT_PTR_FORMAT "", (UINT64)functionId);
     return S_OK;
 }
