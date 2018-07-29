@@ -22,8 +22,8 @@ PROFILER_STUB TailcallStub(FunctionID functionId, COR_PRF_ELT_INFO eltInfo)
     printf("\r\nTailcall %" UINT_PTR_FORMAT "", (UINT64)functionId);
 }
 
-#ifdef _WIN32
 #ifdef _X86_
+#ifdef _WIN32
 void __declspec(naked) EnterNaked(FunctionIDOrClientID functionIDOrClientID, COR_PRF_ELT_INFO eltInfo)
 {
     __asm
@@ -72,6 +72,10 @@ void __declspec(naked) TailcallNaked(FunctionIDOrClientID functionIDOrClientID, 
     }
 }
 #endif
+#elif defined(_AMD64_)
+EXTERN_C void EnterNaked(FunctionIDOrClientID functionIDOrClientID, COR_PRF_ELT_INFO eltInfo);
+EXTERN_C void LeaveNaked(FunctionIDOrClientID functionIDOrClientID, COR_PRF_ELT_INFO eltInfo);
+EXTERN_C void TailcallNaked(FunctionIDOrClientID functionIDOrClientID, COR_PRF_ELT_INFO eltInfo);
 #endif
 
 CorProfiler::CorProfiler() : refCount(0), corProfilerInfo(nullptr)
@@ -101,7 +105,14 @@ HRESULT STDMETHODCALLTYPE CorProfiler::Initialize(IUnknown *pICorProfilerInfoUnk
     auto hr = this->corProfilerInfo->SetEventMask(eventMask);
     if (hr != S_OK)
     {
-        printf("ERROR: Profiler not initialized (HRESULT: %d)", hr);
+        printf("ERROR: Profiler SetEventMask failed (HRESULT: %d)", hr);
+    }
+
+    hr = this->corProfilerInfo->SetEnterLeaveFunctionHooks3WithInfo(EnterNaked, LeaveNaked, TailcallNaked);
+
+    if (hr != S_OK)
+    {
+        printf("ERROR: Profiler SetEnterLeaveFunctionHooks3WithInfo failed (HRESULT: %d)", hr);
     }
 
     return S_OK;
