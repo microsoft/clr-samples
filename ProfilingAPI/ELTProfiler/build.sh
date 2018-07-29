@@ -16,6 +16,6 @@ printf '  Building %s ... ' "$Output"
 CXX_FLAGS="$CXX_FLAGS --no-undefined -Wno-invalid-noreturn -fPIC -fms-extensions -DBIT64 -DPAL_STDCPP_COMPAT -DPLATFORM_UNIX -std=c++11"
 INCLUDES="-I $CORECLR_PATH/src/pal/inc/rt -I $CORECLR_PATH/src/pal/prebuilt/inc -I $CORECLR_PATH/src/pal/inc -I $CORECLR_PATH/src/inc -I $CORECLR_PATH/bin/Product/$BuildOS.$BuildArch.$BuildType/inc"
 
-clang++ -shared -o $Output $CXX_FLAGS $INCLUDES ClassFactory.cpp CorProfiler.cpp dllmain.cpp ILRewriter.cpp
+clang++ -shared -o $Output $CXX_FLAGS $INCLUDES ClassFactory.cpp CorProfiler.cpp dllmain.cpp asmhelpers/amd64/systemv/asmhelpers.S
 
 printf 'Done.\n'
