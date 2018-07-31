@@ -1,14 +1,14 @@
-XPlat CoreCLR Profiler with ELT Simulation
-==========================================
+XPlat CoreCLR Profiler with ELT
+===============================
 
-This sample shows a minimal CoreCLR profiler that simulates Enter/Leave hooks by rewriting the incoming MSIL and adding instructions to make P/Invoke calls to profiler supplied Enter/Leave functions.
+This sample shows a minimal CoreCLR profiler that setups the Enter/Leave hooks using `SetEnterLeaveFunctionHooks3WithInfo`
 
 Prerequisites
 -------------
 
 * CoreCLR Repository (build from source) Dependencies
 * Clang 3.5  (Linux)
-* Visual Studio 2015 Community (Windows)
+* Visual Studio 2017 Community (Windows)
 
 Building on Linux, MacOSX
 -------------------------
@@ -33,7 +33,7 @@ export Output=CorProfiler.so # default
 
 ```bash
 git clone http://github.com/Microsoft/clr-samples
-cd clr-samples/ProfilingAPI/ReJITEnterLeaveHooks
+cd clr-samples/ProfilingAPI/ELTProfiler
 ./build.sh
 ```
 
@@ -51,7 +51,7 @@ Building on Windows
 
 ### Environment
 
-All instructions must be run on the ``VS 2015 x64 Native Tools Command Prompt``.
+All instructions must be run on the ``VS 2017 x64 Native Tools Command Prompt``.
 
 ```batch
 SET CORECLR_PATH=../coreclr # default
@@ -62,10 +62,10 @@ SET Output=ClrProfiler.dll # default
 ```
 
 ### Build
-On the ``VS 2015 x64 Native Tools Command Prompt``.
+On the ``VS 2017 x64 Native Tools Command Prompt``.
 
 * msbuild
-* or open using Visual Studio 2015 Community and Build
+* or open using Visual Studio 2017 Community and Build
 
 ### Setup
 
