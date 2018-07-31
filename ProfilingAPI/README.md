@@ -19,3 +19,5 @@ While this gets the profiler author up-and-running, using headers and libraries 
 ## Samples
 
 * [ReJIT Enter Leave Hooks Profiler](https://github.com/Microsoft/clr-samples/tree/master/ProfilingAPI/ReJITEnterLeaveHooks) - This sample demonstrates a cross-platform portable profiler that rewrites the incoming method `CIL` to add a hook to a profiler supplied function that is called at method entry and exit.
+
+* [ELT Profiler](https://github.com/Microsoft/clr-samples/tree/master/ProfilingAPI/ELTProfiler) - This sample demonstrates a cross-platform profiler that uses `SetEnterLeaveFunctionHooks3WithInfo` to monitor enter/leave of methods.
