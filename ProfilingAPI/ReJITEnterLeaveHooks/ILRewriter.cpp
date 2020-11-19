@@ -491,7 +491,6 @@ public:
                 m_pOutputBuffer[offset++] = (opcode & 0xFF);
             }
 
-            assert(pInstr->m_opcode < _countof(s_OpCodeFlags));
             BYTE flags = s_OpCodeFlags[pInstr->m_opcode];
             switch (flags)
             {
