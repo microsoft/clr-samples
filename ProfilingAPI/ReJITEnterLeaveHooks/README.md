@@ -19,13 +19,13 @@ Building on Linux, MacOSX
 
 ```bash
 export CORECLR_PATH=~/coreclr # default
-export BuildOS=Linux # Linux(default), MacOSX
+export BuildOS=Linux # Linux(default), osx
 export BuildArch=x64 # x64 (default)
 export BuildType=Debug # Debug(default), Release
 export Output=CorProfiler.so # default
 ```
 
-``CORECLR_PATH`` is the path to your cloned and successfully built CoreCLR repository.
+``CORECLR_PATH`` is the path to your cloned and successfully built CoreCLR repository(current is dotnet/runtime).
 
 ``BuildOS``, ``BuildArch`` and ``BuildType`` must match how you built the CoreCLR repository, so the header files and other artifacts needed for compilation are found.
 
